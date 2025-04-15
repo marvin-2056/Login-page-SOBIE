@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Registration</title>
+</head>
+<body>
+  <h1>Register for an Event</h1>
+  <form method="POST" action="/api/register">
+    <input name="fullname" type="text" required placeholder="Full Name" />
+    <input name="email" type="email" required placeholder="Email" />
+    <select name="event" required>
+      <option value="Workshop">Workshop</option>
+      <option value="Seminar">Seminar</option>
+    </select>
+    <button type="submit">Register</button>
+  </form>
+
+  <h2>View My Events</h2>
+  <form id="lookupForm">
+    <input id="lookupEmail" type="email" placeholder="Enter your email" required />
+    <button type="submit">View Events</button>
+  </form>
+
+  <ul id="eventList"></ul>
+
+  
+
+  <script src="js/index.js"></script>
+
+</body>
+</html>
