@@ -9,11 +9,9 @@ router.post('/', async (req, res) => {
   const selectedEvent = event && event.trim() !== "" ? event : "General Admission";
 
   try {
-    // Save to MongoDB
     const reg = new Registration({ fullname, email, event: selectedEvent });
     await reg.save();
 
-    // Send confirmation email
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -30,8 +28,6 @@ router.post('/', async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-
-    // Clean redirect — no name/email in URL
     res.redirect('/confirm.html');
   } catch (err) {
     console.error("Registration error:", err);

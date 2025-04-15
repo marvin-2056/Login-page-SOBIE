@@ -6,26 +6,32 @@ setTimeout(() => {
 const name = sessionStorage.getItem("regName");
 const email = sessionStorage.getItem("regEmail");
 
-const eventData = {
- 
-"Conference": {
-  title: "Annual Conference",
-  description: "A full-day event with guest speakers, panels, and networking.",
-  date: "May 10, 2025",
-  time: "9:00 AM - 5:00 PM",
-  location: "1 Harrison Plaza, Florence, AL 35632",
-  coordinates: { lat: 34.8054, lng: -87.6773 }
-},
-"General Admission": {
-  title: "General Admission",
-  description: "You are registered without a specific event selected.",
-  date: "TBA",
-  time: "TBA",
-  location: "Main Hall, Campus Center",
-  coordinates: { lat: 34.8054, lng: -87.6773 }
-}
+if (!name || !email) {
+  document.getElementById("event-info").innerHTML = `
+    <p>Error: Name or email not found. Please register again.</p>
+  `;
+  throw new Error("Missing name/email in sessionStorage");
 }
 
+
+const eventData = {
+  "Conference": {
+    title: "Annual Conference",
+    description: "A full-day event with guest speakers, panels, and networking.",
+    date: "May 10, 2025",
+    time: "9:00 AM - 5:00 PM",
+    location: "1 Harrison Plaza, Florence, AL 35632",
+    coordinates: { lat: 34.8054, lng: -87.6773 }
+  },
+  "General Admission": {
+    title: "General Admission",
+    description: "You are registered without a specific event selected.",
+    date: "TBA",
+    time: "TBA",
+    location: "Main Hall, Campus Center",
+    coordinates: { lat: 34.8054, lng: -87.6773 }
+  }
+};
 
 fetch("/api/my-events", {
   method: "POST",
