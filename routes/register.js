@@ -5,12 +5,15 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 router.post('/', async (req, res) => {
-  const { fullname, email, event = "General Admission" } = req.body;
+  const { fullname, email, event } = req.body;
+  const selectedEvent = event && event.trim() !== "" ? event : "General Admission";
 
   try {
-    const reg = new Registration({ fullname, email, event });
+    // Save to MongoDB
+    const reg = new Registration({ fullname, email, event: selectedEvent });
     await reg.save();
 
+    // Send confirmation email
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -23,13 +26,15 @@ router.post('/', async (req, res) => {
       from: process.env.EMAIL,
       to: email,
       subject: 'Event Registration Confirmation',
-      text: `Hello ${fullname},\n\nYou are registered for the ${event}.`
+      text: `Hello ${fullname},\n\nYou are registered for: ${selectedEvent}.`
     };
 
     await transporter.sendMail(mailOptions);
-    res.redirect('/confirm.html'); // No more name/email in URL
+
+    // Clean redirect — no name/email in URL
+    res.redirect('/confirm.html');
   } catch (err) {
-    console.error(err);
+    console.error("Registration error:", err);
     res.status(500).json({ error: 'Registration failed.' });
   }
 });
