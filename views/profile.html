@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="/public/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Edit Your Profile</h2>
+      <form id="profileForm" enctype="multipart/form-data">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="school" placeholder="School" />
+        <textarea name="bio" placeholder="Your bio..."></textarea>
+
+        <label>Profile Picture</label>
+        <input type="file" name="profilePic" accept="image/*" />
+
+        <label>Banner Image</label>
+        <input type="file" name="bannerImage" accept="image/*" />
+
+        <button type="submit">Save Changes</button>
+        <p id="message"></p>
+      </form>
+    </div>
+  </div>
+  <script src="/public/js/profile.js"></script>
+</body>
+</html>
