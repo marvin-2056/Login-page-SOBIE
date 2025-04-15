@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Allison's Sobie Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="https://github.com/AllisonLacy" target="_blank">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/allison-lacy-a45118243/" target="_blank">LinkedIn</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+
+
+        <div class="profile-card">
+            <img id="profile-pic"
+                src="https://th.bing.com/th/id/OIP.edEHUKlO5QFyewRpgjlHSwAAAA?w=192&h=192&c=7&r=0&o=5&dpr=1.4&pid=1.7"
+                alt="Allison Lacy">
+            <h1>Allison Lacy</h1>
+            <p>I am a senior at the University of North Alabama majoring in computer information systems.</p>
+        </div>
+
+        <div class="projects-card">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>Project 1</h3>
+                <p>HTML, CSS, and JS interactive game</p>
+                <a href="https://codepen.io/AllisonLacy/pen/JjQeobQ" target="_blank">View Game</a>
+            </div>
+            <div class="project">
+                <h3>Project 2</h3>
+                <p>Generates a random spirit animal</p>
+                <a href="https://codepen.io/AllisonLacy/pen/eYwoWyj" target="_blank">View Spirit Animal</a>
+            </div>
+
+        </div>
+
+
+
+
+
+
+        <div class="projects-card">
+            <p>Enter any webstie suggestions</p>
+
+            <form method="POST" action="insert/">
+                <input name="title">
+                <input name="post">
+                <button class="btn btn-primary" role="submit">new post</button>
+            </form>
+
+
+            <% profileData.forEach(result=> { %>
+                <div class="col-md-8">
+
+
+                    <form method="POST" action="update/">
+                        <input name="updateTitle" value="<%= result.title %>">
+                        <input name="updatePost" value="<%= result.post %>">
+                        <input type="hidden" name="updateId" value="<%=result._id %>">
+                        <button class="btn btn-primary" role="submit"><i class="bi bi-pencil"></i></button>
+                    </form>
+
+
+
+                    <form method="POST" action="delete/">
+                        <input type="hidden" name="deleteId" value="<%=result._id %>">
+                        <button class="btn btn-primary" role="submit"><i class="bi bi-trash3"></i></button>
+                    </form>
+
+
+                </div>
+                <% }); %>
+
+        </div>
+    </main>
+</body>
+<script src="/scripts/scripts.js"></script>
+
+</html>
