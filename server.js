@@ -11,7 +11,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true
 })
 .then(() => console.log('MongoDB Atlas connected'))
-.catch((err) => console.error('Connection error:', err));
+.catch((err) => console.error('MongoDB Connection Error:', err));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

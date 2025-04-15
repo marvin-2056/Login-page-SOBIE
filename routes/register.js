@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 router.post('/', async (req, res) => {
-  const { fullname, email, event } = req.body;
+  const { fullname, email, event = "General Admission" } = req.body;
 
   try {
     const reg = new Registration({ fullname, email, event });
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    res.redirect(`/confirm.html?name=${encodeURIComponent(fullname)}&email=${encodeURIComponent(email)}`);
+    res.redirect('/confirm.html'); // No more name/email in URL
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Registration failed.' });
