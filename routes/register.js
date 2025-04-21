@@ -9,9 +9,19 @@ router.post('/', async (req, res) => {
   const selectedEvent = event && event.trim() !== "" ? event : "General Admission";
 
   try {
+    // Check for existing registration
+    const existing = await Registration.findOne({ fullname, email, event: selectedEvent });
+
+    if (existing) {
+      console.log("User already registered. Skipping duplicate insert.");
+      return res.redirect('/confirm.html');
+    }
+
+    // Create new registration
     const reg = new Registration({ fullname, email, event: selectedEvent });
     await reg.save();
 
+    // Send email confirmation
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {

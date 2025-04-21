@@ -8,7 +8,20 @@
 </head>
 <body>
   <div id="confirmation">✅ Registration Confirmed!</div>
-  <div id="event-info"><em>Loading event details...</em></div>
+
+  <div id="event-list-section">
+    <h3 id="event-list-title"></h3>
+    <ul id="event-list"></ul>
+  </div>
+
+  <div id="event-detail-section">
+    <h3 id="event-title"></h3>
+    <p id="event-description"></p>
+    <p id="event-date"></p>
+    <p id="event-time"></p>
+    <p id="event-location"></p>
+    <div id="map"></div>
+  </div>
 
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
   <script src="js/confirm.js"></script>
