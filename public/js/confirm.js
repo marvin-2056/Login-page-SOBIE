@@ -7,8 +7,8 @@ const name = sessionStorage.getItem("regName");
 const email = sessionStorage.getItem("regEmail");
 
 if (!name || !email) {
-  document.getElementById("event-list-title").textContent = "⚠️ Please register again — session expired.";
-  throw new Error("Missing sessionStorage data");
+  document.getElementById("event-list-title").textContent = "Error: Name or email not found.";
+  throw new Error("Missing name/email in sessionStorage");
 }
 
 const eventData = {
@@ -39,22 +39,26 @@ fetch("/api/my-events", {
 })
 .then(res => res.json())
 .then(data => {
+  const title = document.getElementById("event-list-title");
+  const list = document.getElementById("event-list");
+
   if (!data.length) {
-    document.getElementById("event-list-title").textContent = "No registration found.";
+    title.textContent = "No registrations found.";
     return;
   }
 
-  // Show list of registered events
-  document.getElementById("event-list-title").textContent = `Hi ${name}, you're registered for:`;
-  const ul = document.getElementById("event-list");
+  title.textContent = `Hello ${name}, here are your registered events:`;
+  list.innerHTML = "";
+
+  // Show all events
   data.forEach(reg => {
-    const li = document.createElement("li");
-    li.textContent = reg.event;
-    ul.appendChild(li);
+    const item = document.createElement("li");
+    item.textContent = `${reg.event} - ${reg.school} - Student: ${reg.student}, First Time: ${reg.firstTime}`;
+    list.appendChild(item);
   });
 
-  // Get the most recent registration
-  const latest = data[data.length - 1];
+  // Show details for the most recent event
+  const latest = data[0];
   const event = eventData[latest.event];
 
   if (!event) {
@@ -62,14 +66,12 @@ fetch("/api/my-events", {
     return;
   }
 
-  // Fill event detail section
   document.getElementById("event-title").textContent = event.title;
   document.getElementById("event-description").textContent = event.description;
   document.getElementById("event-date").textContent = `Date: ${event.date}`;
   document.getElementById("event-time").textContent = `Time: ${event.time}`;
   document.getElementById("event-location").textContent = `Location: ${event.location}`;
 
-  // Show Leaflet map
   const map = L.map('map').setView([event.coordinates.lat, event.coordinates.lng], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
@@ -80,5 +82,4 @@ fetch("/api/my-events", {
 })
 .catch(err => {
   console.error("Error fetching registration info:", err);
-  document.getElementById("event-list-title").textContent = "Something went wrong.";
 });

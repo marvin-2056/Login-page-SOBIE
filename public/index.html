@@ -1,22 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Event Registration</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-  <h1>Register for an Event</h1>
-  <form method="POST" action="/api/register">
-    <input name="fullname" type="text" required placeholder="Full Name" />
-    <input name="email" type="email" required placeholder="Email" />
-    <select name="event" required>
-      <option value="">-- Select an Event --</option>
-      <option value="Conference">Conference</option>
-    </select>
-    <button type="submit">Register</button>
-  </form>
+  <div style="text-align: center;">
+    <h1>Register for an Event</h1>
+
+    <div style="display: inline-block; text-align: left;">
+      <form method="POST" action="/api/register">
+        <ul style="list-style-type: none; padding: 0;">
+          <li>
+            <label for="fullname">Full Name</label><br>
+            <input id="fullname" name="fullname" type="text" required placeholder="Full Name" />
+          </li>
+          <br>
+          <li>
+            <label for="email">Email</label><br>
+            <input id="email" name="email" type="email" required placeholder="Email" />
+          </li>
+          <br>
+          <li>
+            <label for="event">Select an Event</label><br>
+            <select id="event" name="event" required>
+              <option value="">-- Select an Event --</option>
+              <option value="Conference">Conference</option>
+            </select>
+          </li>
+          <br>
+          <li>
+            <label for="student">Are you a student?</label><br>
+            <select id="student" name="student" required>
+              <option value="">-- Select --</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </li>
+          <br>
+          <li>
+            <label for="firstTime">Is this your first time attending?</label><br>
+            <select id="firstTime" name="firstTime" required>
+              <option value="">-- Select --</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </li>
+          <br>
+          <li>
+            <label for="school">What school are you coming from?</label><br>
+            <input id="school" name="school" type="text" required placeholder="Enter your school name" />
+          </li>
+          <br>
+          <li>
+            <button type="submit">Register</button>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
 
   <script src="js/index.js"></script>
 </body>
+
+
+<script src="js/index.js"></script>
+
 </html>

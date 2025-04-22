@@ -5,23 +5,21 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 router.post('/', async (req, res) => {
-  const { fullname, email, event } = req.body;
+  const { fullname, email, event, student, firstTime, school } = req.body;
   const selectedEvent = event && event.trim() !== "" ? event : "General Admission";
 
   try {
-    // Check for existing registration
-    const existing = await Registration.findOne({ fullname, email, event: selectedEvent });
+    const reg = new Registration({
+      fullname,
+      email,
+      event: selectedEvent,
+      student,
+      firstTime,
+      school
+    });
 
-    if (existing) {
-      console.log("User already registered. Skipping duplicate insert.");
-      return res.redirect('/confirm.html');
-    }
-
-    // Create new registration
-    const reg = new Registration({ fullname, email, event: selectedEvent });
     await reg.save();
 
-    // Send email confirmation
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
