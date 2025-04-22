@@ -5,4 +5,4 @@ The current website registration feature is **ok** but we can implement somethin
 - Once the form is submitted the user will then be redirected to a confirmation page that will load the hardcoded information of the event and a map API that will display the location of the event.
 - We want to then have the user exit and go back to the home page. 
 
-![Flow of events img](https://github.com/marvin-2056/SOBIE-Register/blob/main/img/SOBIEplan.png)
+![Flow of events img](https://github.com/marvin-2056/SOBIE-Register/blob/main/img/flow_final.png)
