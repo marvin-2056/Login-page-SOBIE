@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
       from: process.env.EMAIL,
       to: email,
       subject: 'Event Registration Confirmation',
-      text: `Hello ${fullname},\n\nYou are registered for: ${selectedEvent}.`
+      text: `Hello ${fullname},\n\nYou are registered for: ${selectedEvent}.\n\nThank you for registering!`,
     };
 
     await transporter.sendMail(mailOptions);
